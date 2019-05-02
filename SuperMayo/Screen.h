@@ -1,7 +1,6 @@
 #pragma once
 class Screen {
 
-
 public:
 	
 	enum class State {

@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "Player.h"
+#include "Monster.h"
 
 #include <iostream>
 
@@ -29,5 +30,13 @@ void ContactListener::beginContactCallback(b2Fixture* fixture) {
 	if (type == Entity::FixtureType::JumpSensor) {
 		Player* player = static_cast<Player*>(fixture->GetBody()->GetUserData());
 		player->resetJump();
+	}
+	else if (type == Entity::FixtureType::LeftSensor) {
+		Monster* monster = static_cast<Monster*>(fixture->GetBody()->GetUserData());
+		monster->setFacingRight(true);
+	}
+	else if (type == Entity::FixtureType::RightSensor) {
+		Monster* monster = static_cast<Monster*>(fixture->GetBody()->GetUserData());
+		monster->setFacingRight(false);
 	}
 }

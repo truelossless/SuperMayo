@@ -15,7 +15,7 @@ int main() {
 	const int WINDOW_WIDTH = 800;
 	const int WINDOW_HEIGHT = 600;
 
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Super Mayo", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(), "Super Mayo", sf::Style::Fullscreen, settings);
 	window.setFramerateLimit(60);
 
 	Utils::setWindow(&window);

@@ -6,7 +6,7 @@ class Platform :
 	public Block
 {
 public:
-	Platform(float x, float y, float w, float h, float l, b2Vec2 s, b2World* world);
+	Platform(float x, float y, float w, float h, float l, std::string texture, b2Vec2 s, b2World* world);
 	
 	// inherited methods
 	void update();

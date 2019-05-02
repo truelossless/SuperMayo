@@ -44,8 +44,10 @@ void Level::load(std::string path) {
 		float w = ground["to"].get<float>() - ground["from"].get<float>();
 		float h = ground["height"].get<float>();
 		float y = Utils::getWindowSize().y - h;
+		std::string texture = ground["tex"].get<std::string>();
+		texture = "assets/tiles/" + texture + ".png";
 
-		m_grounds.push_back(new Block(x, y, w, h, m_world, b2_staticBody));
+		m_grounds.push_back(new Block(x, y, w, h, texture, m_world, b2_staticBody));
 	}
 
 	// create the platforms
@@ -56,15 +58,19 @@ void Level::load(std::string path) {
 		float w = platform["width"].get<float>();
 		float h = platform["height"].get<float>();
 		float y = platform["y"].get<float>();
+		y = Utils::getWindowSize().y - y;
 		float l = platform["length"].get<float>();
+		l = l - w;
 		float sx = platform["speed"]["x"].get<float>();
 		float sy = platform["speed"]["y"].get<float>();
+		std::string texture = platform["tex"].get<std::string>();
+		texture = "assets/tiles/" + texture + ".png";
 
 		if (l == 0.f) {
-			m_platforms.push_back(new Block(x, y, w, h, m_world, b2_staticBody));
+			m_platforms.push_back(new Block(x, y, w, h, texture ,m_world, b2_staticBody));
 		}
 		else {
-			m_platforms.push_back(new Platform(x, y, w, h, l, b2Vec2(sx, sy), m_world));
+			m_platforms.push_back(new Platform(x, y, w, h, l, texture, b2Vec2(sx, sy), m_world));
 		}
 
 	}
@@ -74,6 +80,7 @@ void Level::load(std::string path) {
 		nlohmann::json monster = json["monsters"][i];
 		float x = monster["x"].get<float>();
 		float y = monster["y"].get<float>();
+		y = Utils::getWindowSize().y - y;
 
 		m_monsters.push_back(new Monster(x, y, m_world));
 	}

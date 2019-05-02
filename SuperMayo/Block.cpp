@@ -1,16 +1,22 @@
 #include "Block.h"
+
 #include <iostream>
 
-Block::Block(float x, float y, float w, float h, b2World* world, b2BodyType type) {
+#include "FileManager.h"
+
+Block::Block(float x, float y, float w, float h, std::string texture, b2World* world, b2BodyType type):
+	m_texture(FileManager::getTexture(texture)) {
 
 	//convert the lower-left coordinates to the center-based coordinates of Box2D
 	x = x + w / 2;
 	y = y + h / 2;
 
 	// SFML
-	m_shape.setSize(sf::Vector2f(w, h));
-	m_shape.setOrigin(w / 2, h / 2);
-	m_shape.setPosition(x, y);
+	m_texture->setRepeated(true);
+	m_sprite.setTexture(*m_texture);
+	m_sprite.setTextureRect(sf::IntRect(0, 0, static_cast<int>(w), static_cast<int>(h)));
+	m_sprite.setOrigin(w / 2, h / 2);
+	m_sprite.setPosition(x, y);
 
 	// Box2D
 	m_world = world;
@@ -37,12 +43,12 @@ Block::Block(float x, float y, float w, float h, b2World* world, b2BodyType type
 }
 
 void Block::update() {
-	m_shape.setPosition(m_body->GetPosition().x * SCALE, m_body->GetPosition().y * SCALE);
-	m_shape.setRotation(m_body->GetAngle() * 180 / b2_pi);
+	m_sprite.setPosition(m_body->GetPosition().x * SCALE, m_body->GetPosition().y * SCALE);
+	m_sprite.setRotation(m_body->GetAngle() * 180 / b2_pi);
 }
 
-sf::Shape& Block::getShape() {
-	return m_shape;
+sf::Sprite& Block::getSprite() {
+	return m_sprite;
 }
 
 Entity::Type Block::getEntityType() {

@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-Platform::Platform(float x, float y, float w, float h, float l, b2Vec2 s, b2World * world) :
-	Block(x, y, w, h, world, b2_kinematicBody) {
+Platform::Platform(float x, float y, float w, float h, float l, std::string texture, b2Vec2 s, b2World * world) :
+	Block(x, y, w, h, texture, world, b2_kinematicBody) {
 	m_startPos = x + w / 2;
 	m_speed = s;
 	m_length = l;

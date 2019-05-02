@@ -3,14 +3,14 @@
 #include <iostream>
 #include <Box2D/Box2D.h>
 
-Player::Player(float x, float y, b2World* world): 
-	Block(x, y, 30, 70, world, b2_dynamicBody) {
+Player::Player(float x, float y, float w, float h, b2World* world): 
+	Block(x, y, w, h, "assets/tiles/dirt.png", world, b2_dynamicBody) {
 
 	getBody()->SetGravityScale(8);
 	getBody()->SetFixedRotation(true);
 
 	b2PolygonShape jumpSensorShape;
-	jumpSensorShape.SetAsBox(12 / SCALE, 5 / SCALE, b2Vec2(0, 35 / SCALE), 0);
+	jumpSensorShape.SetAsBox(12 / SCALE, 5 / SCALE, b2Vec2(0, 32 / SCALE), 0);
 
 	b2FixtureDef jumpSensorFixtureDef;
 	jumpSensorFixtureDef.shape = &jumpSensorShape;
@@ -36,6 +36,11 @@ void Player::resetJump() {
 	m_jumping = false;
 }
 
+void Player::setFacingRight(bool facing)
+{
+	m_facingRight = facing;
+}
+
 Entity::Type Player::getEntityType() {
 	return Entity::Type::Player;
 }
@@ -51,6 +56,8 @@ void Player::update() {
 	else if (linearVelocity.x < -m_maxVelocity / SCALE) {
 		linearVelocity.x = -m_maxVelocity / SCALE;
 	}
+
+	m_sprite.setScale(m_facingRight ? 1 : -1, 1);
 	
 	getBody()->SetLinearVelocity(linearVelocity);
 	Block::update();

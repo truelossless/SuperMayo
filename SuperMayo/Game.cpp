@@ -6,14 +6,20 @@
 
 #include "Utils.h"
 
-Game::Game(sf::RenderWindow & window):
+Game::Game(sf::RenderWindow & window) :
 	m_window(window),
-	m_player(0, 100, &m_world),
+	m_player(0, 100, 32, 64, &m_world),
 	m_world(b2Vec2(0.f, 9.8f)),
 	m_level(&m_world) {
 
 	m_world.SetContactListener(&m_contactListener);
 	m_view = window.getDefaultView();
+
+	// if the window is too big, scale the view 
+	if (Utils::getWindowSize().y > 640) {
+		m_view.setViewport(sf::FloatRect(-0.5, -1, 2, 2));
+	}
+
 	m_view.setCenter(m_player.getBody()->GetPosition().x * Entity::SCALE, m_view.getCenter().y);
 
 	m_level.load("levels/level1.json");
@@ -45,10 +51,14 @@ Screen::State Game::update() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) force.x = 100;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) impulse = -50;
 
-	m_player.getBody()->ApplyForceToCenter(force, true);
+	if (force.x != 0) {
+		m_player.setFacingRight(force.x > 0 ? true : false);
+		m_player.getBody()->ApplyForceToCenter(force, true);
+	}
+
 	m_player.jump(impulse); // will not trigger if the player is already jumping
 
-	m_window.clear();
+	m_window.clear(sf::Color(0, 200, 255));
 
 	// add one more frame to the simulation
 	m_world.Step(1.f / 60.f, 8, 3);
@@ -74,7 +84,7 @@ Screen::State Game::update() {
 	// draw everything
 	for (b2Body* body = m_world.GetBodyList(); body; body = body->GetNext()) {
 		Block *block = static_cast<Block*>(body->GetUserData());
-		m_window.draw(block->getShape());
+		m_window.draw(block->getSprite());
 	}
 	
 	// the player is out of the screen

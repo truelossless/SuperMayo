@@ -1,74 +1,130 @@
 {
     "ground": [
 
+        
         {
-            "from": 0,
-            "to": 100,
-            "height": 80
+            "from": -1000,
+            "to": -968,
+            "height": 1024,
+            "tex": "dirt"
+        },
+        
+        
+        {
+            "from": -968,
+            "to": 600,
+            "height": 128,
+            "tex": "dirt"
+        },
+        
+        {
+            "from": 700,
+            "to": 800,
+            "height": 64,
+            "tex": "dirt"
         },
 
         {
-            "from": 150,
-            "to": 180,
-            "height": 120
+            "from": 200,
+            "to": 232,
+            "height": 160,
+            "tex": "dirt_top"
         },
-
-        {
-            "from": 250,
-            "to": 320,
-            "height": 50
-        },
-
-        {
-            "from": 320,
-            "to": 500,
-            "height": 100
-        },
-
+        
         {
             "from": 500,
-            "to": 600,
-            "height": 80
+            "to": 532,
+            "height": 160,
+            "tex": "dirt_top"
+        },
+        {
+            "from": 900,
+            "to": 1000,
+            "height": 16,
+            "tex": "dirt_top"
         },
 
         {
-            "from": 600,
-            "to": 6000,
-            "height": 60
-        }
+            "from": 1064,
+            "to": 1096,
+            "height": 16,
+            "tex": "dirt_top"
+        },
 
+        {
+            "from": 1160,
+            "to": 1192,
+            "height": 16,
+            "tex": "dirt_top"
+        },
+
+        {
+            "from": 1256,
+            "to": 2000,
+            "height": 32,
+            "tex": "dirt_top"
+        },
+
+        {
+            "from": 2500,
+            "to": 3500,
+            "height": 32,
+            "tex": "dirt_top"
+        },
+
+        {
+            "from": 3500,
+            "to": 3532,
+            "height": 1024,
+            "tex": "dirt"
+        }
     ],
 
     "platforms": [
         {
-            "x": 150,
-            "y": 450,
-            "width": 100,
+            "x": 2000,
+            "y": 80,
+            "width": 96,
             "height": 20,
-            "length": 350,
+            "tex": "platform96",
             "speed": {
                 "x": 100,
                 "y": 0
-            }
-        },
-
-        {
-            "x": 500,
-            "y": 400,
-            "width": 200,
-            "height": 20,
-            "speed": {
-                "x": 250,
-                "y": 0
             },
-            "length": 600
+            "length": 500
         }
     ],
 
     "monsters": [
+        
+        {
+            "x": 200,
+            "y": 200
+        },
+
+        {
+            "x": 220,
+            "y": 200
+        },
+
+        {
+            "x": 240,
+            "y": 200
+        },
+
+        {
+            "x": 260,
+            "y": 200
+        },
+
+        {
+            "x": 280,
+            "y": 200
+        },
+
         {
             "x": 300,
-            "y": 400
+            "y": 200
         }
     ]
 }

@@ -15,7 +15,9 @@ public:
 
 	enum class FixtureType {
 		Collision,
-		JumpSensor
+		JumpSensor,
+		LeftSensor,
+		RightSensor
 	};
 
 	static const float SCALE; // = 30.f
